@@ -3,15 +3,13 @@
 import { useEffect } from "react"
 const ButtonShadow = ({ isActive, id }) => {
     const setActive = () => {
-        console.log("AKTIF")
         const shadowButton = document.querySelector(`#${id}`).classList
-        shadowButton.add('-translate-x-1')
         shadowButton.remove('hidden')
+        shadowButton.add('-translate-x-1')
     }
 
     const setUnactive = () => {
         const shadowButton = document.querySelector(`#${id}`).classList
-        console.log("TIDAK AKTIF")
         shadowButton.remove('-translate-x-1')
         shadowButton.add('hidden')
     }
@@ -24,7 +22,7 @@ const ButtonShadow = ({ isActive, id }) => {
 
     }, [isActive])
     return (
-        <div id={id} className="bg-[#4F4F4F] w-[68px] h-[68px] rounded-full absolute transition-all duration-1000 delay-1000" />
+        <div id={id} className="bg-[#4F4F4F] w-[68px] h-[68px] rounded-full absolute transition-all duration-1000" />
     )
 }
 

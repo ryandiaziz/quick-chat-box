@@ -1,12 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import taskActive from '../../../assets/icons/active-task.png'
-import task from '../../../assets/icons/task.png'
+import taskActive from '../../../assets/icons/task-active.svg'
+import task from '../../../assets/icons/task.svg'
 import ButtonShadow from '../buttonshadow'
+import { setMenuTask } from '../../../states/menuSlice'
 
 const TaskButton = () => {
-    const [isActive, setIsActive] = useState(false)
+    const dispatch = useDispatch()
+    const { isTaskActive, isQuickActive, isChatActive } = useSelector((state) => state.menu)
 
     const setActive = () => {
         const button = document.querySelector('#taskbutton').classList
@@ -24,18 +27,54 @@ const TaskButton = () => {
         iconImage.setAttribute('src', task)
     }
 
+    const setQuickActive = () => {
+        const wrapper = document.querySelector('#taskbuttonwrapper').classList
+        wrapper.add('-translate-x-40')
+    }
+
+    const setQuickUnactive = () => {
+        const wrapper = document.querySelector('#taskbuttonwrapper').classList
+        wrapper.remove('-translate-x-40')
+    }
+
+    const setChatActive = () => {
+        const wrapper = document.querySelector('#taskbuttonwrapper').classList
+        wrapper.add('-translate-x-44')
+    }
+
+    const setChatUnactive = () => {
+        const wrapper = document.querySelector('#taskbuttonwrapper').classList
+        wrapper.remove('-translate-x-44')
+    }
+
     useEffect(() => {
-        if (isActive) {
+        if (isQuickActive) {
+            setQuickActive()
+        } else {
+            setQuickUnactive()
+        }
+    }, [isQuickActive])
+
+    useEffect(() => {
+        if (isTaskActive) {
             setActive()
         } else {
             setUnactive()
         }
-    }, [isActive])
+    }, [isTaskActive])
+
+    useEffect(() => {
+        if (isChatActive) {
+            setChatActive()
+        } else {
+            setChatUnactive()
+        }
+    }, [isChatActive])
 
     return (
-        <div>
-            <ButtonShadow id='taskshadowbutton' isActive={isActive} />
-            <button onClick={() => setIsActive(!isActive)} id='taskbutton' className="relative flex justify-center items-center rounded-full w-[60px] h-[60px] cursor-pointer bg-white transition-all ease-in-out delay-150 duration-300">
+        <div id='taskbuttonwrapper' className='absolute transition-all ease-in-out delay-150 duration-300 right-1'>
+            <ButtonShadow id='taskshadowbutton' isActive={isTaskActive} />
+            <button onClick={() => dispatch(setMenuTask())} id='taskbutton' className="relative flex justify-center items-center rounded-full w-[60px] h-[60px] cursor-pointer bg-white transition-all ease-in-out duration-300">
                 <img src={task} id='imgtaskbutton' className='w-2/5' alt="icon" />
             </button>
         </div>

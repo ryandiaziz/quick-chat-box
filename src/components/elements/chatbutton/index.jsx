@@ -1,12 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
-import chatActive from '../../../assets/icons/active-chat.png'
-import chat from '../../../assets/icons/chat.png'
 import ButtonShadow from '../buttonshadow'
+import { setMenuChat } from '../../../states/menuSlice'
+import chatActive from '../../../assets/icons/chat-active.svg'
+import chat from '../../../assets/icons/chat.svg'
 
 const ChatButton = () => {
-    const [isActive, setIsActive] = useState(false)
+    const dispatch = useDispatch()
+    const { isChatActive, isQuickActive } = useSelector((state) => state.menu)
 
     const setActive = () => {
         const iconImage = document.querySelector('#imgchatbutton')
@@ -24,27 +27,36 @@ const ChatButton = () => {
         iconImage.setAttribute('src', chat)
     }
 
-    // const activeHandler = () => {
-    //     setIsActive(!isActive)
-    //     if (isActive) {
-    //         setActive()
-    //     } else {
-    //         setUnactive()
-    //     }
-    // }
+    const setQuickActive = () => {
+        const wrapper = document.querySelector('#chatbuttonwrapper').classList
+        wrapper.add('-translate-x-20')
+    }
+
+    const setQuickUnactive = () => {
+        const wrapper = document.querySelector('#chatbuttonwrapper').classList
+        wrapper.remove('-translate-x-20')
+    }
 
     useEffect(() => {
-        if (isActive) {
+        if (isQuickActive) {
+            setQuickActive()
+        } else {
+            setQuickUnactive()
+        }
+    }, [isQuickActive])
+
+    useEffect(() => {
+        if (isChatActive) {
             setActive()
         } else {
             setUnactive()
         }
-    }, [isActive])
+    }, [isChatActive])
 
     return (
-        <div>
-            <ButtonShadow id='chatshadowbutton' isActive={isActive} />
-            <button onClick={() => setIsActive(!isActive)} id='chatbutton' className="relative flex justify-center items-center rounded-full w-[60px] h-[60px] cursor-pointer bg-white transition-all ease-in-out delay-150 duration-300">
+        <div id='chatbuttonwrapper' className='absolute transition-all ease-in-out delay-150 duration-300 right-1'>
+            <ButtonShadow id='chatshadowbutton' isActive={isChatActive} />
+            <button onClick={() => dispatch(setMenuChat())} id='chatbutton' className="relative flex justify-center items-center rounded-full w-[60px] h-[60px] cursor-pointer bg-white transition-all ease-in-out duration-300">
                 <img src={chat} id='imgchatbutton' className='w-2/5' alt="icon" />
             </button>
         </div>
