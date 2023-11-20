@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { useSelector } from "react-redux"
 
 import MainBoxLayout from "./MainBoxLayout"
+import TaskBox from '../fragments/TaskBox'
+import TaskHeader from '../fragments/TaskHeader'
 
 const TaskLayout = () => {
     const { isTaskActive } = useSelector((state) => state.menu)
@@ -26,7 +28,8 @@ const TaskLayout = () => {
     }, [isTaskActive])
     return (
         <MainBoxLayout id={'taskbox'} className={'hidden'}>
-            <h1 className="text-center font-bold text-5xl">TASK</h1>
+            <TaskHeader />
+            <TaskBox />
         </MainBoxLayout>
     )
 }

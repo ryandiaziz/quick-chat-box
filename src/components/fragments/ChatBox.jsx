@@ -7,7 +7,7 @@ import PreviewDate from "../elements/previewdate"
 
 const ChatBox = ({ index }) => {
     return (
-        <section className={`flex py-[22px] ${index && 'border-t-2 border-primary-gray'}`}>
+        <article className={`flex py-[22px] ${index && 'border-t-2 border-primary-gray'}`}>
             <ProfileImage />
             <div className="ml-5">
                 <div className="flex items-center">
@@ -17,7 +17,7 @@ const ChatBox = ({ index }) => {
                 <PreviewName />
                 <PreviewMessage />
             </div>
-        </section>
+        </article>
     )
 }
 
