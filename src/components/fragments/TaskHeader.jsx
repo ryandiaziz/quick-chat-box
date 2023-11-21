@@ -4,7 +4,7 @@ import DropDownButton from '../elements/dropdownbutton'
 
 const TaskHeader = () => {
     return (
-        <div className={`flex justify-between items-center w-full mb-[22px]`}>
+        <div className={`flex justify-between items-center w-full`}>
             <DropDownButton />
             <Button />
         </div>

@@ -27,6 +27,7 @@ const ChatLayout = () => {
 
     }, [isChatActive])
     return (
+
         <MainBoxLayout id={'chatbox'} className={'hidden'}>
             <SearchBar />
             {Array(3).fill(0).map((d, i) => (

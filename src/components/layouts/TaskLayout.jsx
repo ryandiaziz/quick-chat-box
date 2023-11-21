@@ -29,7 +29,8 @@ const TaskLayout = () => {
     return (
         <MainBoxLayout id={'taskbox'} className={'hidden'}>
             <TaskHeader />
-            <TaskBox />
+            {Array(5).fill(0).map((d, i) => (<TaskBox key={i} index={i} />))}
+
         </MainBoxLayout>
     )
 }
