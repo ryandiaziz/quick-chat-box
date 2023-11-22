@@ -13,7 +13,10 @@ const TaskBox = ({ index }) => {
         <article className={`py-[22px] ${index && 'border-t-2 border-primary-gray'}`}>
             <div className="flex items-start justify-between">
                 <div className="flex items-start">
-                    <TaskCheck />
+                    <TaskCheck
+                        checkID={`checkIcon${index}`}
+                        uncheckID={`uncheckIcon${index}`}
+                    />
                     <TaskTitle />
                 </div>
                 <div className="flex items-star">

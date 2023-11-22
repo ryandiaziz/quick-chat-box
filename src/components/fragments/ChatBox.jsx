@@ -5,14 +5,14 @@ import PreviewName from "../elements/previewname"
 import PreviewMessage from "../elements/previewmessage"
 import PreviewDate from "../elements/previewdate"
 
-const ChatBox = ({ index }) => {
+const ChatBox = ({ index, room }) => {
     return (
         <article className={`flex py-[22px] ${index && 'border-t-2 border-primary-gray'}`}>
             <ProfileImage />
             <div className="ml-5">
                 <div className="flex items-center">
-                    <ChatTittle />
-                    <PreviewDate />
+                    <ChatTittle title={room.name} />
+                    <PreviewDate date={room.createdAt} />
                 </div>
                 <PreviewName />
                 <PreviewMessage />
