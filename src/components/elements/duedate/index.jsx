@@ -1,6 +1,8 @@
-const DueDate = () => {
+import countDay from "../../../util/countDay"
+
+const DueDate = ({ date }) => {
     return (
-        <p className="text-indicator-red font-normal text-sm">10 Days Left</p>
+        <p className="text-indicator-red font-normal text-sm">{countDay(date)} Days Left</p>
     )
 }
 

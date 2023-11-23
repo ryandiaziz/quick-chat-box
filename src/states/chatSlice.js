@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-import { getRooms } from '../services/chat'
+import { getRooms } from '../services/chat.service'
 
 const initialState = {
     rooms: [],

@@ -41,7 +41,7 @@ const ChatLayout = () => {
 
         <MainBoxLayout id={'chatbox'} className={'hidden'}>
             <SearchBar />
-            {isLoading ? <Loader />
+            {isLoading ? <Loader text={'Chats'} />
                 : rooms.map((room, i) => (
                     <ChatBox
                         key={i}

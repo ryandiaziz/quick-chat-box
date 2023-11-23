@@ -1,11 +1,11 @@
 import EditIcon from "./EditIcon"
 import InputDesc from "./InputDesc"
 
-const TaskDesc = () => {
+const TaskDesc = ({ text }) => {
     return (
         <div className="flex">
             <EditIcon />
-            <InputDesc />
+            <InputDesc text={text} />
         </div>
     )
 }
