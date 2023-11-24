@@ -9,8 +9,10 @@ import DropDownIcon from "../elements/dropdownbutton/DropDownIcon"
 import MoreIcon from "../elements/moreicon"
 import DatePicker from "../elements/datepicker"
 import TaskDesc from "../elements/taskdesc"
+import IconWrapper from "../elements/iconwrapper"
 
-const TaskBox = ({ index, todo, id, isComplete }) => {
+const TaskBox = ({ index, id, isComplete, todo, }) => {
+
     const { unCompleteTask } = useSelector((state) => state.task)
     return (
         <article className={`py-[22px] ${(index || (isComplete && unCompleteTask.length)) && 'border-t-2 border-primary-gray'}`}>
@@ -29,14 +31,18 @@ const TaskBox = ({ index, todo, id, isComplete }) => {
                     />
                 </div>
                 <div className="flex items-star">
-                    {!todo.complete && <DueDate date={todo.due} />}
+                    {(!todo.complete) && <DueDate date={todo.due} />}
                     <PreviewDate date={todo.due} />
-                    <DropDownIcon />
-                    <MoreIcon
-                        id={todo.id}
-                        index={index}
-                        complete={todo.complete}
-                    />
+                    <IconWrapper>
+                        <DropDownIcon />
+                    </IconWrapper>
+                    <IconWrapper>
+                        <MoreIcon
+                            id={todo.id}
+                            index={index}
+                            complete={todo.complete}
+                        />
+                    </IconWrapper>
                 </div>
             </div>
             <div className="ml-[45px] mt-4 ">
