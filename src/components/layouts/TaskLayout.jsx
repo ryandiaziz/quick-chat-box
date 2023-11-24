@@ -6,12 +6,12 @@ import MainBoxLayout from "./MainBoxLayout"
 import TaskBox from '../fragments/TaskBox'
 import TaskHeader from '../fragments/TaskHeader'
 import Loader from '../elements/loader'
-import { getTodosData, updateTodoData } from '../../states/taskSlice'
+import { getTodosData } from '../../states/taskSlice'
 
 const TaskLayout = () => {
     const dispatch = useDispatch()
     const { isTaskActive } = useSelector((state) => state.menu)
-    const { complete, unComplete, isLoading } = useSelector((state) => state.task)
+    const { completeTask, unCompleteTask, isLoading } = useSelector((state) => state.task)
 
     const setTaskBoxActive = () => {
         const chatBox = document.getElementById('taskbox').classList
@@ -39,12 +39,26 @@ const TaskLayout = () => {
     }, [isTaskActive])
     return (
         <MainBoxLayout id={'taskbox'} className={'hidden'}>
-            <button onClick={() => dispatch(updateTodoData({ taskID: 1, todoID: 1 }))}>TEST</button>
             <TaskHeader />
             {isLoading ? <Loader text={'Tasks'} />
                 : <>
-                    {unComplete.map((todo, i) => (<TaskBox key={i} index={i} id={`uncomplete${i}`} todo={todo} />))}
-                    {complete.map((todo, i) => (<TaskBox key={i} index={1} id={`complete${i}`} todo={todo} />))}
+                    {unCompleteTask.map((todo, i) => (
+                        <TaskBox
+                            key={i}
+                            index={i}
+                            id={`uncomplete${i}`}
+                            todo={todo}
+                        />
+                    ))}
+                    {completeTask.map((todo, i) => (
+                        <TaskBox
+                            key={i}
+                            index={i}
+                            id={`complete${i}`}
+                            todo={todo}
+                            isComplete={true}
+                        />
+                    ))}
                 </>
             }
         </MainBoxLayout>

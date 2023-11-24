@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import { useSelector } from "react-redux"
+
 import TaskCheck from "../elements/taskcheck"
 import TaskTitle from "../elements/tasktitle"
 import DueDate from "../elements/duedate"
@@ -8,23 +10,33 @@ import MoreIcon from "../elements/moreicon"
 import DatePicker from "../elements/datepicker"
 import TaskDesc from "../elements/taskdesc"
 
-const TaskBox = ({ index, todo, id }) => {
+const TaskBox = ({ index, todo, id, isComplete }) => {
+    const { unCompleteTask } = useSelector((state) => state.task)
     return (
-        <article className={`py-[22px] ${index && 'border-t-2 border-primary-gray'}`}>
+        <article className={`py-[22px] ${(index || (isComplete && unCompleteTask.length)) && 'border-t-2 border-primary-gray'}`}>
             <div className="flex items-start justify-between">
                 <div className="flex items-start">
                     <TaskCheck
+                        id={todo.id}
+                        index={index}
+                        isCheck={todo.complete}
                         checkID={`checkIcon${id}`}
                         uncheckID={`uncheckIcon${id}`}
-                        isCheck={todo.complete}
                     />
-                    <TaskTitle text={todo.name} />
+                    <TaskTitle
+                        text={todo.name}
+                        complete={todo.complete}
+                    />
                 </div>
                 <div className="flex items-star">
-                    <DueDate date={todo.due} />
+                    {!todo.complete && <DueDate date={todo.due} />}
                     <PreviewDate date={todo.due} />
                     <DropDownIcon />
-                    <MoreIcon />
+                    <MoreIcon
+                        id={todo.id}
+                        index={index}
+                        complete={todo.complete}
+                    />
                 </div>
             </div>
             <div className="ml-[45px] mt-4 ">
